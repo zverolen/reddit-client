@@ -16,7 +16,7 @@ Prototypes are implemented in an open-source app [Penpot](https://penpot.app/) a
 
 ### Prototype for Bigger screens
 
-This prototype features basic actions as well as loading screens and error messages. All controls are clickable. Loading screens will show "loaded" screens after a short delay. Links that lead outside the app are marked when clicked.
+This prototype features basic actions as well as loading screens and error messages. All controls are clickable. "Loading" screens will show "loaded" screens after a short delay. Links that lead outside the app are marked when clicked.
 
 This prototype contains more actions than the other one. The actions are:
 
@@ -31,7 +31,8 @@ This prototype contains more actions than the other one. The actions are:
 
 ### Prototype for Smaller screens.
 
-This prototype features less actions than the one for big screens. It has same actions and screens as well as new ones. The actions are:
+This prototype features less actions than the one for big screens. It also features "loading" screens and error messages.
+It has same actions and screens as well as new ones. The actions are:
 
 1. Showing screen with search results.
 2. Opening the feed list in the dropdown menu (with a loading error, so other feeds are not available).
