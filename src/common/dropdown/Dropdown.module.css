@@ -1,0 +1,38 @@
+.container {
+  padding: 5px;
+  border: 1px solid;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.error-message:focus {
+  background-color: lightblue;
+}
+
+button {
+  all: inherit;
+  box-sizing: border-box; 
+  display: flex; 
+  justify-content: space-between; 
+  border: 1px solid;
+  padding: 10px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+button:not(:disabled):hover, button:not(:disabled):focus {
+  background-color: #000;
+  color: #fff;
+}
+
+button:not(:disabled):focus {
+  outline: 1px solid;
+  outline-offset: 2px;
+}

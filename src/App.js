@@ -1,56 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import { Feed } from './features/feed/Feed';
+import { Dropdown } from './common/dropdown/Dropdown';
+import { Search } from './common/search/Search';
+import { tempDefaultFeed } from './features/feed/feedSlice';
 import './App.css';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+  
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(tempDefaultFeed());
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
+    <div className='App'>
+      <header className="header">
+        <a data-test="link-home" onClick={handleClick} href='#'>Reddit Client</a>
+        <Search />
       </header>
+      <main>
+        <Dropdown />
+        <Feed /> 
+      </main>    
     </div>
   );
 }

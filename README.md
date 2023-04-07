@@ -8,6 +8,14 @@
 
 It's a simple app so no parameters are specified. I will figure out what to show and how much of it to show on the go.
 
+## Phase One - Initial setup of the projects
+
+At this point the basic architecture of the app is implemented. It provides the basic shape of the state and initial layout components. Basic error messages are added for the cases when no data is loaded (which is currently by default as no data fetching is implemented).
+
+One breakpoint exists that determines at which point the dropdown menu switches between full-size and collapsible modes (500px).
+
+PENDING: Verification of screen readers support.
+
 ##  Interactive Prototypes
 
 Prototypes are implemented in an open-source app [Penpot](https://penpot.app/) and are available via links below. After opening a link you should press Play button and choose the flow (see the following screenshot). Please, reade the additional info about the prototypes in the subsections below.
