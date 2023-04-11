@@ -17,12 +17,13 @@ function App() {
   return (
     <div className='App'>
       <header className="header">
-        <a data-test="link-home" onClick={handleClick} href='#'>Reddit Client</a>
+      <a data-test="link-home" onClick={handleClick} href='/'>Reddit Client</a>
         <Search />
       </header>
       <main>
-        <Dropdown />
-        <Feed /> 
+        <h1 className='visually-hidden'>Reddit Client App</h1>
+        <Feed />
+        <Dropdown /> 
       </main>    
     </div>
   );

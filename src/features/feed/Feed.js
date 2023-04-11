@@ -15,7 +15,7 @@ export function Feed() {
   feedNewsIds.length ? content = <div></div> : content = <p data-test="error-feed-message">{error}</p>;
     
   return(
-    <div>
+    <div aria-live="polite">
       <h2 data-test="feed-heading">{heading}</h2>
       {content}
     </div>

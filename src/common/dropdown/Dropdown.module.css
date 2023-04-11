@@ -1,13 +1,13 @@
 .container {
-  padding: 5px;
-  border: 1px solid;
+  padding: calc(5 / 16 * 1em);
+  border: calc(1 / 16 * 1em) solid;
 }
 
 .heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: calc(20 / 16 * 1em);
 }
 
 .error-message:focus {
@@ -19,8 +19,8 @@ button {
   box-sizing: border-box; 
   display: flex; 
   justify-content: space-between; 
-  border: 1px solid;
-  padding: 10px;
+  border: calc(1 / 16 * 1em) solid;
+  padding: calc(10 / 16 * 1em);
 }
 
 button:disabled {
@@ -33,6 +33,6 @@ button:not(:disabled):hover, button:not(:disabled):focus {
 }
 
 button:not(:disabled):focus {
-  outline: 1px solid;
-  outline-offset: 2px;
+  outline: calc(1 / 16 * 1em) solid;
+  outline-offset: calc(2 / 16 * 1em);
 }

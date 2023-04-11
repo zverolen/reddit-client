@@ -22,7 +22,7 @@ export function Search() {
   return (
     <form onSubmit={handleSearch} className={style.search}>
       <div>
-        <label htmlFor="search-input" className="visually-hidden">Search</label>
+        {/* <label htmlFor="search-input" className="visually-hidden">Search</label> */}
         <input 
           value={searchInputValue} 
           id="search-input" 

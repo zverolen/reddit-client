@@ -82,7 +82,7 @@ export function DynamicDropdown({ content }) {
       <h2>Choose Category</h2>
         { toggleButton }
       </div>
-      <div>
+      <div aria-live="polite">
         { isExpanded && <p data-test="error-feedsNav-message" id="dropdown-content">{ content }</p> }
       </div>
    </>
