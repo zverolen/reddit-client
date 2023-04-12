@@ -16,7 +16,7 @@ export const feedSlice = createSlice({
       state.searchTerm = action.payload
     },
     searchFeedNews: (state) => {
-      state.currentFeedName = `Search results for'${state.searchTerm}'`;
+      state.currentFeedName = `Search results for '${state.searchTerm}'`;
       state.currentFeedNewsIds = [];
       state.searchTerm = '';
     }, 

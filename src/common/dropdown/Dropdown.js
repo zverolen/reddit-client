@@ -73,18 +73,17 @@ export function DynamicDropdown({ content }) {
                           aria-expanded={isExpanded}
                           onClick={handleClick}
                         >
-                          {isExpanded ? 'Collapse' : 'Expand'}
+                          Choose Category
                         </button>;
 
   return (  
    <>
      <div data-test="toggle-feedsNav-heading" className={styles.heading}>
-      <h2>Choose Category</h2>
-        { toggleButton }
-      </div>
-      <div aria-live="polite">
-        { isExpanded && <p data-test="error-feedsNav-message" id="dropdown-content">{ content }</p> }
-      </div>
+      <h2>{ toggleButton }</h2>  
+    </div>
+    <div aria-live="polite">
+      { isExpanded && <p data-test="error-feedsNav-message" id="dropdown-content">{ content }</p> }
+    </div>
    </>
   );
 }
