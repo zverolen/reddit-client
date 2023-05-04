@@ -1,0 +1,38 @@
+.container {
+  padding: calc(5 / 16 * 1em);
+  border: calc(1 / 16 * 1em) solid;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(20 / 16 * 1em);
+}
+
+.error-message:focus {
+  background-color: lightblue;
+}
+
+button {
+  all: inherit;
+  box-sizing: border-box; 
+  display: flex; 
+  justify-content: space-between; 
+  border: calc(1 / 16 * 1em) solid;
+  padding: calc(10 / 16 * 1em);
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+button:not(:disabled):hover, button:not(:disabled):focus {
+  background-color: #000;
+  color: #fff;
+}
+
+button:not(:disabled):focus {
+  outline: calc(1 / 16 * 1em) solid;
+  outline-offset: calc(2 / 16 * 1em);
+}

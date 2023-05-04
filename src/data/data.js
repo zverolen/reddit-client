@@ -10,7 +10,8 @@ export const support = {
   supportEmail: 'fakeSupportEmail@fake.emails'
 }
 export const errorMessages = {
-  feedError: `Feed was not loaded due to a system error. Try reloading or contact the support.`,
+  subredditError: `Subreddit was not loaded due to a system error. Try reloading or contact the support.`,
   feedsNavError: 'Categories were not loaded due to a system error. Try reloading or contact the support.',
-  searchError: 'No news found. Try another search term or report a problem'
+  searchError: 'No news found. Try another search term or report a problem',
+  prepareSubredditHeading: 'The value for the prepareSubredditHeading() should be a string which is not empty'
 };

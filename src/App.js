@@ -1,6 +1,5 @@
 import React from 'react';
-import { Feed } from './features/feed/Feed';
-import { Dropdown } from './common/dropdown/Dropdown';
+import { Content } from './common/content/Content';
 import { Search } from './common/search/Search';
 import { tempDefaultFeed } from './features/feed/feedSlice';
 import './App.css';
@@ -22,8 +21,7 @@ function App() {
       </header>
       <main>
         <h1 className='visually-hidden'>Reddit Client App</h1>
-        <Feed />
-        <Dropdown /> 
+         <Content />
       </main>    
     </div>
   );

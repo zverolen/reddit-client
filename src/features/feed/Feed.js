@@ -1,23 +1,52 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { selectHeading, selectCurrentFeedNewsIds } from "./feedSlice";
-import { errorMessages } from "../../data/data";
+import { selectSubreddit, changeSubreddit } from "./feedSlice";
+import { useGetSubredditQuery } from "../api/apiSlice";
+import { prepareSubredditHeading } from "../../util/util";
+import { FeedItem } from "../../common/feedItem/FeedItem";
 
 export function Feed() {
-  const heading = useSelector(selectHeading);
-  const feedNewsIds = useSelector(selectCurrentFeedNewsIds);
-  const errorMessageFeed = errorMessages.feedError.slice();
-  const errorMessageSearch = errorMessages.searchError.slice();
-  const error = heading.includes('Search results') ? errorMessageSearch : errorMessageFeed;
-  let content;
 
-  feedNewsIds.length ? content = <div></div> : content = <p data-test="error-feed-message">{error}</p>;
+  const currentSubreddit = useSelector(selectSubreddit);
+  const dispatch = useDispatch();
+
+  const {
+    data: feed,
+    isLoading,
+    isSuccess,
+    isError,
+    isFetching,
+    error
+  } = useGetSubredditQuery(currentSubreddit);
+
+  let content;
+  const heading = prepareSubredditHeading(currentSubreddit);
+
+  function handleReload(e) {
+    e.preventDefault();
+    dispatch(changeSubreddit(currentSubreddit));
+  }
+  
+  if (isLoading || isFetching) {
+    content = <p>loading</p>
+  } else if (isSuccess) {
+    const feedItems = feed.data.children; 
+    content = feedItems.map((item, index) => {
+      return <FeedItem key={item.data.id} data={item.data} />
+    });
+  } else if (isError) {
+    console.log(error);
+    content = <div data-test="error">
+                <p>Subreddit was not loaded due to a system error. Try <a data-test="reload-link" href="/" onClick={handleReload}>reloading</a> or <a data-test="support-link" href="mailto:??@??.??">contact the support</a>.
+                </p>
+              </div>;
+  }
     
   return(
-    <div aria-live="polite">
+    <div data-test="feed" aria-live="polite">
       <h2 data-test="feed-heading">{heading}</h2>
-      {content}
+      <div data-test="content">{content}</div>
     </div>
   );
 }
