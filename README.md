@@ -8,6 +8,12 @@
 
 It's a simple app so no parameters are specified. I will figure out what to show and how much of it to show on the go.
 
+## Functionality details
+
+### Search
+Search is performed by filtering the results of the current subreddit response data. It takes into consideration only the headlines and is case-sensitive. For the lack of requirements, there is no optimisation to make the search more flexible. The limitations are described for the user.
+If there are no search results, the user sees the message with explanation and suggested actions.
+
 ## Phase One - Initial setup of the projects
 
 At this point the basic architecture of the app is implemented. It provides the basic shape of the state and initial layout components. Basic error messages are added for the cases when no data is loaded (which is currently by default as no data fetching is implemented).

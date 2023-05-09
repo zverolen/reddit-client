@@ -5,12 +5,14 @@ import { Collapsible } from "../collapsible/Collapsible";
 
 import styles from './Nav.module.css';
 
-export function Nav({ size }) {
+export function Nav({ size, onNavigation }) {
   const dispatch = useDispatch();
   
   function handleSubredditsNav(e) {
     e.preventDefault();
+    onNavigation(); //Dirty treak to clear the term from the App local state
     dispatch(changeSubreddit(e.target.dataset.endpoint));
+
   }
 
   const navLinks = <ul>

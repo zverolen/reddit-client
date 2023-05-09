@@ -1,36 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setSearchTerm, selectSearchTerm, searchFeedNews } from "../../features/feed/feedSlice";
 
 import style from './Search.module.css';
 
-export function Search() {
-  const dispatch = useDispatch();
-  const searchInputValue = useSelector(selectSearchTerm);
-  const isDisabled = searchInputValue === '';
+export function Search( { onSearch } ) {
+  const [ searchTerm = '', setSearchTerm ] = useState();
+  // const dispatch = useDispatch();
+  // const searchInputValue = useSelector(selectSearchTerm);
+  const isDisabled = searchTerm === '';
 
   function handleSearchInput(e) {
-    dispatch(setSearchTerm(e.target.value));
+    // dispatch(setSearchTerm(e.target.value));
+    setSearchTerm(e.target.value);
   }
 
   function handleSearch(e) {
     e.preventDefault();
-    if (searchInputValue !== '') dispatch(searchFeedNews()); 
+    if (searchTerm !== '') onSearch(searchTerm);
+    setSearchTerm('');
   }
 
   return (
     <form onSubmit={handleSearch} className={style.search}>
       <div>
-        {/* <label htmlFor="search-input" className="visually-hidden">Search</label> */}
+        <label htmlFor="search-input">Search headlines (case-sensitive):</label>
         <input 
-          value={searchInputValue} 
-          id="search-input" 
-          placeholder="Search"
+          value={searchTerm} 
+          id="search-input"
+          type="search"
           onChange={handleSearchInput}
+          placeholder="Search term..."
         />
       </div>
-      <button disabled={isDisabled} type="Submit">Submit</button>
+      <button disabled={isDisabled} type="Submit">Search</button>
     </form>
   );
 }

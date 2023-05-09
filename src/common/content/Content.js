@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from "react";
 import { Nav } from "../nav/Nav";
 import { Feed } from "../../features/feed/Feed";
 
-export function Content() {
+export function Content( { term, onNavigation } ) {
   const [ windowSize, setWindowSize ] = useState(null);
 
   useLayoutEffect(() => {
@@ -29,13 +29,13 @@ export function Content() {
       {windowSize === 'small'
       ?
       <>
-        <Nav size={windowSize}/>
-        <Feed />
+        <Nav size={windowSize} onNavigation={onNavigation} />
+        <Feed term={term} />
       </>
       :
       <>
-        <Feed />
-        <Nav size={windowSize}/>
+        <Feed  term={term} />
+        <Nav size={windowSize} onNavigation={onNavigation} />
       </>
       }  
    </div>

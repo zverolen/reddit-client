@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Content } from './common/content/Content';
 import { Search } from './common/search/Search';
 import { tempDefaultFeed } from './features/feed/feedSlice';
@@ -7,21 +7,30 @@ import { useDispatch } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
+  const [ searchTerm = '', setSearchTerm ] = useState();
   
   function handleClick(e) {
     e.preventDefault();
     dispatch(tempDefaultFeed());
   }
 
+  function handleSearch(term) {
+    setSearchTerm(term);
+  }
+
+  function clearSearchTerm() {
+    setSearchTerm('');
+  }
+ 
   return (
     <div className='App'>
       <header className="header">
       <a data-test="link-home" onClick={handleClick} href='/'>Reddit Client</a>
-        <Search />
+        <Search onSearch={handleSearch} />
       </header>
       <main>
         <h1 className='visually-hidden'>Reddit Client App</h1>
-         <Content />
+         <Content term={searchTerm} onNavigation={clearSearchTerm} />
       </main>    
     </div>
   );
