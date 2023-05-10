@@ -6,6 +6,8 @@ import { useGetSubredditQuery } from "../api/apiSlice";
 import { prepareSubredditHeading } from "../../util/util";
 import { FeedItem } from "../../common/feedItem/FeedItem";
 
+import style from './Feed.module.css';
+
 export function Feed( { term } ) {
 
   const currentSubreddit = useSelector(selectSubreddit);
@@ -60,7 +62,7 @@ export function Feed( { term } ) {
   } 
   
   return(
-    <div data-test="feed" aria-live="polite">
+    <div data-test="feed" aria-live="polite" className={style.feed}>
       <h2 data-test="feed-heading">{heading}</h2>
       <div data-test="content">{content}</div>
     </div>

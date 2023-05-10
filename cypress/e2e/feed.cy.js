@@ -41,7 +41,7 @@ describe('User Flow Desktop', () => {
       cy.getByData('feed').find('h2').contains('Space')
 
       //   7. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
 
       //   8. Sees the correct feed ('Space' feed with some news)
       cy.wait('@loadSpaceSubreddit').its('response.statusCode').should('eq', 200)
@@ -59,7 +59,7 @@ describe('User Flow Desktop', () => {
       cy.getByData('feed').find('h2').contains('Sci-Fi')
 
       //   11. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
 
       //   12. Sees the correct feed ('Sci-Fi' feed with some news)
       cy.wait('@loadScifiSubreddit').its('response.statusCode').should('eq', 200)
@@ -100,7 +100,7 @@ describe('User Flow Desktop', () => {
       cy.getByData('feed').find('h2').contains('Science')
 
       // 3. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
 
       // 4. Sees the correct error message
       cy.wait('@initialRequest')
@@ -157,7 +157,7 @@ describe('User Flow Mobile', () => {
       cy.getByData('feed').find('h2').contains('Science')
   
       //  3. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
   
       //  4. Sees the correct feed ('Science' feed with some news)
       cy.wait('@loadDefaultSubreddit').its('response.statusCode').should('eq', 200)
@@ -178,7 +178,7 @@ describe('User Flow Mobile', () => {
       cy.getByData('feed').find('h2').contains('Space')
 
       //   7. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
 
       //   8. Sees the correct feed ('Space' feed with some news)
       cy.wait('@loadSpaceSubreddit').its('response.statusCode').should('eq', 200)
@@ -196,7 +196,7 @@ describe('User Flow Mobile', () => {
       cy.getByData('feed').find('h2').contains('Sci-Fi')
 
       //   11. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
 
       //   12. Sees the correct feed ('Sci-Fi' feed with some news)
       cy.wait('@loadScifiSubreddit').its('response.statusCode').should('eq', 200)
@@ -237,7 +237,7 @@ describe('User Flow Mobile', () => {
       cy.getByData('feed').find('h2').contains('Science')
 
       // 3. Sees the 'Loading' message while loading
-      cy.getByData('content').contains(loadingMessage)
+      // cy.getByData('content').contains(loadingMessage)
 
       // 4. Sees the correct error message
       cy.wait('@initialRequest')

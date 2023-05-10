@@ -2,6 +2,8 @@ import React, { useState, useLayoutEffect } from "react";
 import { Nav } from "../nav/Nav";
 import { Feed } from "../../features/feed/Feed";
 
+import style from './Content.module.css';
+
 export function Content( { term, onNavigation } ) {
   const [ windowSize, setWindowSize ] = useState(null);
 
@@ -25,19 +27,9 @@ export function Content( { term, onNavigation } ) {
   
   return ( 
     // I will remove the position switch: the Nav will always come first.
-    <div data-test="global-content">
-      {windowSize === 'small'
-      ?
-      <>
-        <Nav size={windowSize} onNavigation={onNavigation} />
-        <Feed term={term} />
-      </>
-      :
-      <>
-        <Feed  term={term} />
-        <Nav size={windowSize} onNavigation={onNavigation} />
-      </>
-      }  
+    <div data-test="global-content" className={style.content}>
+      <Nav size={windowSize} onNavigation={onNavigation} />
+      <Feed term={term} />
    </div>
   );
 }

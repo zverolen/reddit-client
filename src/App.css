@@ -23,36 +23,13 @@
 
 main {
   margin-block: calc(20 / 16 * 1em);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: start;
-  gap: calc(20 / 16 * 1em);
 }
 
-main > div:nth-child(2) {
-  width: 70vw;
-}
 
-main > div:last-child {
-  width: 20vw;
-}
 
 @media screen and (max-width: calc(500 / 16 * 1em)) {
   .App {
     width: 80%;
-  }
-
-  main {
-    display: block;
-  }
-
-  main > div:nth-child(2) {
-    width: 100%;
-  }
-  
-  main > div:last-child {
-    width: 100%;
   }
 }
 

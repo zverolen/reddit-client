@@ -1,6 +1,7 @@
 .container {
   padding: calc(5 / 16 * 1em);
   border: calc(1 / 16 * 1em) solid;
+  flex-basis: 15vw;
 }
 
 .heading {

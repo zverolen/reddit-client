@@ -1,0 +1,11 @@
+.content {
+  display: flex;
+  gap: calc(20 / 16 * 1rem);
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 500px) {
+  .content {
+    display: block;
+  }
+}
