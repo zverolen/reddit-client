@@ -1,8 +1,18 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { useDispatch } from "react-redux";
+
+import { setCurrentNewsId, setCurrentView } from "../../features/feed/feedSlice";
 
 export function FeedItem({ data }) {
   let content;
+  const dispatch = useDispatch();
+
+  function handleOpenNews(e) {
+    e.preventDefault();
+    dispatch(setCurrentNewsId(data.id));
+    dispatch(setCurrentView('singleNews'));
+  }
 
   // Rough checks while I'm figuring out how to distinguish between the possible content
     if (data.post_hint === 'hosted:video') {
@@ -35,6 +45,7 @@ export function FeedItem({ data }) {
       <p data-test="author">{data.author}</p>
       <h3>{data.title}</h3>
       {content}
+      <a href="/" onClick={handleOpenNews}>See full news</a>
       <hr/>
     </div>
   );

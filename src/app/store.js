@@ -4,7 +4,7 @@ import { apiSlice } from '../features/api/apiSlice';
 
 export const store = configureStore({
   reducer: {
-    feed: feedReducer,
+    feedSubreddit: feedReducer,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
   middleware: getDefaultMiddleware =>
