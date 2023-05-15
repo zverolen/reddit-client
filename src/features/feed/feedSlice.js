@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 const initialState = {
   subreddit: 'science',
@@ -16,9 +17,6 @@ export const feedSlice = createSlice({
   reducers: {
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload
-    },
-    tempDefaultFeed: (state) => {
-      state.currentFeedName = 'Default Feed'
     },
     changeSubreddit: (state, action) => {
       state.subreddit = action.payload;
@@ -49,9 +47,11 @@ export const feedSlice = createSlice({
 
 // 1. Fetch science subreddit and do everything with it. 
 // 2. Implement other subreddits search
-export const fetchFeed = createAsyncThunk('feed/fetchFeed', async () => {
+export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) => {
   //`/${subreddit}.json`
-  const url = 'https://www.reddit.com/r/science.json';
+  
+  console.log(subreddit);
+  const url = `https://www.reddit.com/r/${subreddit}.json`;
   const response = fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -72,12 +72,12 @@ export const selectCurrentFeedNewsIds = (state) => state.feedSubreddit.currentFe
 export const selectSearchTerm = (state) => state.feedSubreddit.searchTerm;
 export const selectAllFeedsNames = (state) => state.feedSubreddit.allFeedsNames;
 export const selectSubreddit = (state) => state.feedSubreddit.subreddit;
-export const selectCurrentNewsId = (state) => state.feedSubreddit.currentNewsId;
 //New
 export const selectAllNews = (state) => state.feedSubreddit.news;
 export const selectCurrentNews = (state, newsId) => state.feedSubreddit.news.find(news => news.id === newsId);
 export const selectSearchedNews = (state, searchTerm) => state.feedSubreddit.news.filter(news => news.data.title.includes(searchTerm));
 export const selectFeedStatus = (state) => state.feedSubreddit.status;
 export const selectFeedView = (state) => state.feedSubreddit.currentView;
+export const selectCurrentNewsId = (state) => state.feedSubreddit.currentNewsId;
 
 export default feedSlice.reducer;

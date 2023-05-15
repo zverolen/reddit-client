@@ -32,10 +32,8 @@ export function Feed( { term } ) {
   const currentNews = useSelector(selectCurrentNews);
 
   useEffect(() => {
-    console.log(status);
     if (status === 'idle') {
-      console.log('make request')
-      dispatch(fetchFeed());
+      dispatch(fetchFeed('science'));
     }
   }, [status, dispatch])
 
