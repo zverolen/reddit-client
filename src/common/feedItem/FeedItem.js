@@ -1,12 +1,13 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setCurrentNewsId, setCurrentView } from "../../features/feed/feedSlice";
+import { selectFeedView, setCurrentNewsId, setCurrentView } from "../../features/feed/feedSlice";
 
 export function FeedItem({ data }) {
   let content;
   const dispatch = useDispatch();
+  const view = useSelector(selectFeedView);
 
   function handleOpenNews(e) {
     e.preventDefault();
@@ -45,7 +46,7 @@ export function FeedItem({ data }) {
       <p data-test="author">{data.author}</p>
       <h3>{data.title}</h3>
       {content}
-      <a href="/" onClick={handleOpenNews}>See full news</a>
+      {view === 'subreddit' && <a href="/" onClick={handleOpenNews}>See full news</a>}
       <hr/>
     </div>
   );

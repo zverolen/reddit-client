@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Content } from './common/content/Content';
 import { Search } from './common/search/Search';
-import { tempDefaultFeed } from './features/feed/feedSlice';
+import { tempDefaultFeed, fetchFeed } from './features/feed/feedSlice';
 import './App.css';
 import { useDispatch } from 'react-redux';
 
@@ -11,7 +11,7 @@ function App() {
   
   function handleClick(e) {
     e.preventDefault();
-    dispatch(tempDefaultFeed());
+    dispatch(fetchFeed('science'));
   }
 
   function handleSearch(term) {
