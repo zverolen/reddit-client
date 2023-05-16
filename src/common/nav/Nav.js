@@ -1,18 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { changeSubreddit, fetchFeed } from "../../features/feed/feedSlice";
+import { fetchFeed, setCurrentSubreddit, setCurrentView } from "../../features/feed/feedSlice";
 import { Collapsible } from "../collapsible/Collapsible";
 
 import styles from './Nav.module.css';
 
-export function Nav({ size, onNavigation }) {
+export function Nav({ size }) {
   const dispatch = useDispatch();
   
   function handleSubredditsNav(e) {
     e.preventDefault();
-    // onNavigation(); //Dirty treak to clear the term from the App local state
-    // dispatch(changeSubreddit(e.target.dataset.endpoint));
+    dispatch(setCurrentView('subreddit'));
     dispatch(fetchFeed(e.target.dataset.endpoint));
+    dispatch(setCurrentSubreddit(e.target.dataset.endpoint));
   }
 
   const navLinks = <nav>

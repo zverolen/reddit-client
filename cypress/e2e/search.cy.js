@@ -7,8 +7,9 @@ describe('Perform Search', () => {
     })
     cy.visit("http://localhost:3000")
     cy.wait('@getSubreddit')
+
     //User performs search
-    cy.get('label').contains('Search headlines:')
+    cy.get('label').contains('Search headlines (case-sensitive):')
     cy.get('input').should('have.attr', 'placeholder', 'Search term...')
     cy.get('button[type="submit"]').should('be.disabled')
     cy.get('input').focus()
@@ -18,6 +19,7 @@ describe('Perform Search', () => {
     cy.get('button[type="submit"]').focus()
     cy.get('button[type="submit"]').should('be.focused')
     cy.get('button[type="submit"]').click()
+
     //User sees results
     cy.getByData('feed-heading').contains('Search results for the term "JUICE":')
     cy.getByData('content').children().should('have.length', 2)
@@ -25,6 +27,7 @@ describe('Perform Search', () => {
     cy.getByData('content').find('> div:nth-child(2) h3').contains('ESA is launching JUICE very soon! We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim so players can get hands on with this amazing spacecraft and learn more about the mission.')
     cy.get('input').should('not.have.value', 'JUICE')
     cy.get('button[type="submit"]').should('be.disabled')
+
     //User navigates back to the default feed
     cy.fixture('subreddit').then((json) => {
       cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getNewSubreddit')

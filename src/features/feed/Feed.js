@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { 
   selectSubreddit, 
-  changeSubreddit, 
   selectAllNews,
   selectCurrentNews,
   selectSearchedNews,
   fetchFeed,
   selectFeedStatus,
   selectFeedView,
+  selectSearchTerm,
   setCurrentView,
   setCurrentNewsId
 } from "./feedSlice";
@@ -18,15 +18,19 @@ import { FeedItem } from "../../common/feedItem/FeedItem";
 
 import style from './Feed.module.css';
 
-export function Feed( { term } ) {
+export function Feed() {
 
-  const currentSubreddit = useSelector(selectSubreddit);
   const dispatch = useDispatch();
   const status = useSelector(selectFeedStatus);
-  const allNews = useSelector(selectAllNews);
   const view = useSelector(selectFeedView);
+  const currentSubreddit = useSelector(selectSubreddit);
+  const allNews = useSelector(selectAllNews);
   const currentNews = useSelector(selectCurrentNews);
   const searchedNews = useSelector(selectSearchedNews);
+  const searchTerm = useSelector(selectSearchTerm);
+
+  let content;
+  let heading;
 
   useEffect(() => {
     if (status === 'idle') {
@@ -34,25 +38,37 @@ export function Feed( { term } ) {
     }
   }, [status, dispatch])
 
-  let content;
-  let heading;
-
   if (status === 'loading') {
     content = <p>loading</p>
+
   } else if (status === 'success') {
     heading = prepareSubredditHeading(currentSubreddit);
-    if (view === 'subreddit') {
-      content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
-    } else if (view === 'singleNews') {
-      content = <FeedItem key={currentNews.data.id} data={currentNews.data} />;
-    } else if (view === 'search') {
-      content = searchedNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
-    }
-  }
 
-  function handleReload(e) {
-    e.preventDefault();
-    dispatch(changeSubreddit(currentSubreddit));
+    if (view === 'subreddit') {
+      // heading = prepareSubredditHeading(currentSubreddit);
+      content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
+
+    } else if (view === 'singleNews') {
+      // heading = prepareSubredditHeading(currentSubreddit);
+      content = <FeedItem key={currentNews.data.id} data={currentNews.data} />;
+
+    } else if (view === 'search') {
+      if (searchedNews.length > 0) {
+        heading = `Search results for the term "${searchTerm}":`;
+        content = searchedNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
+
+      } else {
+        heading = `No results for your phrase "${searchTerm}".`
+        content = <p data-test="error">Try another phrase or <a data-test="support-link" href="mailto:??@??.??">contact the support</a></p>;
+      }
+    }
+
+  } else if (status === 'failed') {
+    heading = prepareSubredditHeading(currentSubreddit);
+    content = <div data-test="error">
+                <p>Subreddit was not loaded due to a system error. Try <a data-test="reload-link" href="/" onClick={reload}>reloading</a> or <a data-test="support-link" href="mailto:??@??.??">contact the support</a>.
+               </p>
+               </div>;
   }
 
   function goBack(e) {
@@ -60,38 +76,11 @@ export function Feed( { term } ) {
     dispatch(setCurrentView('subreddit'));
     dispatch(setCurrentNewsId(null));
   }
- 
-  // save children directly instead of data - refactoring
-  // if (isLoading || isFetching) {
-  //   content = <p>loading</p>
-  // } else if (isSuccess) {
-  //   console.log('allNews');
-  //   console.log(allNews);
-  //   if (term === '') {
-  //     heading = prepareSubredditHeading(currentSubreddit);
-  //     const feedItems = feed.data.children;
-  //     content = feedItems.map((item, index) => {
-  //       return <FeedItem key={item.data.id} data={item.data} />
-  //     });
-  //   } else {
-  //     const filteredNews = feed.data.children.filter(item => item.data.title.includes(term));
-  //     if (filteredNews.length) {
-  //       heading = `Search results for the term "${term}":`;
-  //       content = filteredNews.map((item, index) => {
-  //         return <FeedItem key={item.data.id} data={item.data} />
-  //       });
-  //     } else {
-  //       heading = `No results for your phrase "${term}".`;
-  //       content = <p data-test="error">Try another phrase or <a data-test="support-link" href="mailto:??@??.??">contact the support</a></p>
-  //     }
-  //   }
-  // } else if (isError) {
-  //   console.log(error);
-  //   content = <div data-test="error">
-  //               <p>Subreddit was not loaded due to a system error. Try <a data-test="reload-link" href="/" onClick={handleReload}>reloading</a> or <a data-test="support-link" href="mailto:??@??.??">contact the support</a>.
-  //               </p>
-  //             </div>;
-  // } 
+
+  function reload(e) {
+    e.preventDefault();
+    dispatch(fetchFeed(currentSubreddit));
+  }
   
   return(
     <div data-test="feed" aria-live="polite" className={style.feed}>

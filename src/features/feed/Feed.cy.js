@@ -1,5 +1,7 @@
 import React from 'react'
 import { Feed } from './Feed'
+import { search, setCurrentView } from './feedSlice'
+import { store } from '../../app/store'
 
 // TODO: Loading error
 //!! Currently the third test runs with .only (no unmounting of the component or anything)
@@ -9,7 +11,7 @@ describe('<Feed />', () => {
     cy.fixture('subreddit').then((json) => {
       cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
     })
-    cy.mount(<Feed term={''}/>)
+    cy.mount(<Feed />)
     cy.getByData('content').children().should('have.length', 5)
 
     // All types of news
@@ -23,7 +25,9 @@ describe('<Feed />', () => {
     cy.fixture('subreddit').then((json) => {
       cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
     })
-    cy.mount(<Feed term={'JUICE'}/>)
+    store.dispatch(search('JUICE'));
+    store.dispatch(setCurrentView('search'));
+    cy.mount(<Feed />)
     cy.getByData('feed-heading').contains('Search results for the term "JUICE":')
     cy.getByData('content').children().should('have.length', 2)
     cy.getByData('content').find('> div:first-child h3').contains('JUICE Launch')
@@ -34,6 +38,8 @@ describe('<Feed />', () => {
     cy.fixture('subreddit').then((json) => {
       cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
     })
+    store.dispatch(search('фваващдоыва'));
+    store.dispatch(setCurrentView('search'));
     cy.mount(<Feed term={'фваващдоыва'}/>)
     cy.getByData('feed-heading').contains('No results for your phrase "фваващдоыва".')
     cy.getByData('error').contains('Try another phrase or contact the support')

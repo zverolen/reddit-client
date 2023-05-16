@@ -4,7 +4,7 @@ import { Feed } from "../../features/feed/Feed";
 
 import style from './Content.module.css';
 
-export function Content( { term, onNavigation } ) {
+export function Content() {
   const [ windowSize, setWindowSize ] = useState(null);
 
   useLayoutEffect(() => {
@@ -26,10 +26,9 @@ export function Content( { term, onNavigation } ) {
   });
   
   return ( 
-    // I will remove the position switch: the Nav will always come first.
     <div data-test="global-content" className={style.content}>
-      <Nav size={windowSize} onNavigation={onNavigation} />
-      <Feed term={term} />
+      <Nav size={windowSize} />
+      <Feed />
    </div>
   );
 }

@@ -14,12 +14,6 @@ export const feedSlice = createSlice({
   name: 'feedSubreddit',
   initialState,
   reducers: {
-    setSearchTerm: (state, action) => {
-      state.searchTerm = action.payload
-    },
-    changeSubreddit: (state, action) => {
-      state.subreddit = action.payload;
-    },
     setCurrentNewsId: (state, action) => {
       state.currentNewsId = action.payload;
     },
@@ -28,6 +22,9 @@ export const feedSlice = createSlice({
     },
     search: (state, action) => {
       state.searchTerm = action.payload;
+    },
+    setCurrentSubreddit: (state, action) => {
+      state.subreddit = action.payload;
     }
   },
   extraReducers(builder) {
@@ -61,18 +58,14 @@ export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) =>
     return response;
 });
 
-export const { setSearchTerm, searchFeedNews, tempDefaultFeed, changeSubreddit, setCurrentNewsId, setCurrentView, search  } = feedSlice.actions;
+export const { setCurrentNewsId, setCurrentView, search, setCurrentSubreddit  } = feedSlice.actions;
 
-export const selectHeading = (state) => state.feedSubreddit.currentFeedName;
-export const selectCurrentFeedNewsIds = (state) => state.feedSubreddit.currentFeedNewsIds;
-export const selectSearchTerm = (state) => state.feedSubreddit.searchTerm;
-export const selectAllFeedsNames = (state) => state.feedSubreddit.allFeedsNames;
 export const selectSubreddit = (state) => state.feedSubreddit.subreddit;
-//New
 export const selectAllNews = (state) => state.feedSubreddit.news;
 export const selectCurrentNews = (state) => state.feedSubreddit.news.find(news => news.data.id === state.feedSubreddit.currentNewsId);
 export const selectSearchedNews = (state) => state.feedSubreddit.news.filter(news => news.data.title.includes(state.feedSubreddit.searchTerm));
 export const selectFeedStatus = (state) => state.feedSubreddit.status;
 export const selectFeedView = (state) => state.feedSubreddit.currentView;
+export const selectSearchTerm = (state) => state.feedSubreddit.searchTerm;
 
 export default feedSlice.reducer;
