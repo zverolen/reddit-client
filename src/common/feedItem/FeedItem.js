@@ -8,6 +8,7 @@ export function FeedItem({ data }) {
   let content;
   const dispatch = useDispatch();
   const view = useSelector(selectFeedView);
+  const isSubredditView = view === 'subreddit' || view === 'search';
 
   function handleOpenNews(e) {
     e.preventDefault();
@@ -46,7 +47,7 @@ export function FeedItem({ data }) {
       <p data-test="author">{data.author}</p>
       <h3>{data.title}</h3>
       {content}
-      {view === 'subreddit' && <a href="/" onClick={handleOpenNews}>See full news</a>}
+      {isSubredditView && <a href="/" onClick={handleOpenNews}>See full news</a>}
       <hr/>
     </div>
   );

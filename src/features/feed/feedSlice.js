@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
 const initialState = {
   subreddit: 'science',
@@ -26,6 +25,9 @@ export const feedSlice = createSlice({
     },
     setCurrentView: (state, action) => {
       state.currentView = action.payload;
+    },
+    search: (state, action) => {
+      state.searchTerm = action.payload;
     }
   },
   extraReducers(builder) {
@@ -44,13 +46,7 @@ export const feedSlice = createSlice({
   }
 });
 
-
-// 1. Fetch science subreddit and do everything with it. 
-// 2. Implement other subreddits search
-export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) => {
-  //`/${subreddit}.json`
-  
-  console.log(subreddit);
+export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) => {  
   const url = `https://www.reddit.com/r/${subreddit}.json`;
   const response = fetch(url)
     .then((response) => {
@@ -65,7 +61,7 @@ export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) =>
     return response;
 });
 
-export const { setSearchTerm, searchFeedNews, tempDefaultFeed, changeSubreddit, setCurrentNewsId, setCurrentView  } = feedSlice.actions;
+export const { setSearchTerm, searchFeedNews, tempDefaultFeed, changeSubreddit, setCurrentNewsId, setCurrentView, search  } = feedSlice.actions;
 
 export const selectHeading = (state) => state.feedSubreddit.currentFeedName;
 export const selectCurrentFeedNewsIds = (state) => state.feedSubreddit.currentFeedNewsIds;
@@ -74,10 +70,9 @@ export const selectAllFeedsNames = (state) => state.feedSubreddit.allFeedsNames;
 export const selectSubreddit = (state) => state.feedSubreddit.subreddit;
 //New
 export const selectAllNews = (state) => state.feedSubreddit.news;
-export const selectCurrentNews = (state, newsId) => state.feedSubreddit.news.find(news => news.id === newsId);
-export const selectSearchedNews = (state, searchTerm) => state.feedSubreddit.news.filter(news => news.data.title.includes(searchTerm));
+export const selectCurrentNews = (state) => state.feedSubreddit.news.find(news => news.data.id === state.feedSubreddit.currentNewsId);
+export const selectSearchedNews = (state) => state.feedSubreddit.news.filter(news => news.data.title.includes(state.feedSubreddit.searchTerm));
 export const selectFeedStatus = (state) => state.feedSubreddit.status;
 export const selectFeedView = (state) => state.feedSubreddit.currentView;
-export const selectCurrentNewsId = (state) => state.feedSubreddit.currentNewsId;
 
 export default feedSlice.reducer;

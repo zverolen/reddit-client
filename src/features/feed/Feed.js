@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { 
   selectSubreddit, 
   changeSubreddit, 
-  selectCurrentNewsId,
   selectAllNews,
   selectCurrentNews,
   selectSearchedNews,
@@ -14,10 +13,8 @@ import {
   setCurrentView,
   setCurrentNewsId
 } from "./feedSlice";
-import { useGetSubredditQuery } from "../api/apiSlice";
 import { prepareSubredditHeading } from "../../util/util";
 import { FeedItem } from "../../common/feedItem/FeedItem";
-import { FeedView } from "../../common/feedView/FeedView";
 
 import style from './Feed.module.css';
 
@@ -25,26 +22,17 @@ export function Feed( { term } ) {
 
   const currentSubreddit = useSelector(selectSubreddit);
   const dispatch = useDispatch();
-  const currentId = useSelector(selectCurrentNewsId);
   const status = useSelector(selectFeedStatus);
   const allNews = useSelector(selectAllNews);
   const view = useSelector(selectFeedView);
   const currentNews = useSelector(selectCurrentNews);
+  const searchedNews = useSelector(selectSearchedNews);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchFeed('science'));
     }
   }, [status, dispatch])
-
-  // const {
-  //   data: feed,
-  //   isLoading,
-  //   isSuccess,
-  //   isError,
-  //   isFetching,
-  //   error
-  // } = useGetSubredditQuery(currentSubreddit);
 
   let content;
   let heading;
@@ -57,6 +45,8 @@ export function Feed( { term } ) {
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
     } else if (view === 'singleNews') {
       content = <FeedItem key={currentNews.data.id} data={currentNews.data} />;
+    } else if (view === 'search') {
+      content = searchedNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
     }
   }
 

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setSearchTerm, selectSearchTerm, searchFeedNews } from "../../features/feed/feedSlice";
+import { setSearchTerm, selectSearchTerm, searchFeedNews, search, setCurrentView } from "../../features/feed/feedSlice";
 
 import style from './Search.module.css';
 
 export function Search( { onSearch } ) {
   const [ searchTerm = '', setSearchTerm ] = useState();
-  // const dispatch = useDispatch();
-  // const searchInputValue = useSelector(selectSearchTerm);
+  const dispatch = useDispatch();
+  const searchInputValue = useSelector(selectSearchTerm);
   const isDisabled = searchTerm === '';
 
   function handleSearchInput(e) {
@@ -18,8 +18,14 @@ export function Search( { onSearch } ) {
 
   function handleSearch(e) {
     e.preventDefault();
-    if (searchTerm !== '') onSearch(searchTerm);
-    setSearchTerm('');
+    // if (searchTerm !== '') onSearch(searchTerm);
+    if (searchTerm !== '') {
+      dispatch(search(searchTerm));
+      dispatch(setCurrentView('search'));
+      setSearchTerm('');
+    };
+
+    
   }
 
   return (
