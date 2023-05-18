@@ -24,7 +24,7 @@ export function Search() {
   }
 
   return (
-    <form onSubmit={handleSearch} className={style.search}>
+    <form onSubmit={handleSearch} className={style.search} role="search">
       <div>
         <label htmlFor="search-input">Search headlines (case-sensitive):</label>
         <input 
@@ -32,10 +32,9 @@ export function Search() {
           id="search-input"
           type="search"
           onChange={handleSearchInput}
-          placeholder="Search term..."
         />
       </div>
-      <button disabled={isDisabled} type="Submit">Search</button>
+      <button data-test="search-button" disabled={isDisabled} >Search</button>
     </form>
   );
 }

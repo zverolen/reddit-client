@@ -5,6 +5,9 @@ import { fetchFeed } from './features/feed/feedSlice';
 import './App.css';
 import { useDispatch } from 'react-redux';
 
+
+// Extract the action to the Header component? (if the action remains after design)
+
 function App() {
   const dispatch = useDispatch();
   

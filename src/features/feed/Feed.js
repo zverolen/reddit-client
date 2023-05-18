@@ -85,8 +85,19 @@ export function Feed() {
   return(
     <div data-test="feed" aria-live="polite" className={style.feed}>
       <h2 data-test="feed-heading">{heading}</h2>
+      {view === 'search' && <a 
+                              data-test="go-back-link" 
+                              href="/" 
+                              onClick={goBack}>Go Back to {prepareSubredditHeading(currentSubreddit)}
+                              </a>
+                            }
       <div data-test="content">{content}</div>
-      {view === 'singleNews' && <a href="/" onClick={goBack}>Link Back</a>}
+      {view === 'singleNews' && <a 
+                              data-test="go-back-link" 
+                              href="/" 
+                              onClick={goBack}>Go Back to {prepareSubredditHeading(currentSubreddit)}
+                              </a>
+                            }
     </div>
   );
 }

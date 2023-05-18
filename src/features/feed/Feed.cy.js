@@ -3,7 +3,6 @@ import { Feed } from './Feed'
 import { search, setCurrentView } from './feedSlice'
 import { store } from '../../app/store'
 
-// TODO: Loading error
 //!! Currently the third test runs with .only (no unmounting of the component or anything)
 
 describe('<Feed />', () => {
