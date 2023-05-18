@@ -9,12 +9,11 @@ import {
   fetchFeed,
   selectStatus,
   selectView,
-  selectSearchTerm,
-  setView,
-  setOpenNewsId
+  selectSearchTerm
 } from "./feedSlice";
 import { prepareSubredditHeading } from "../../util/util";
 import { FeedItem } from "../../common/feedItem/FeedItem";
+import { GoBackLink } from "../../common/goBackLink/GoBackLink";
 
 import style from './Feed.module.css';
 
@@ -45,11 +44,9 @@ export function Feed() {
     heading = prepareSubredditHeading(subreddit);
 
     if (view === 'subreddit') {
-      // heading = prepareSubredditHeading(subreddit);
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
 
     } else if (view === 'singleNews') {
-      // heading = prepareSubredditHeading(subreddit);
       content = <FeedItem key={openNews.data.id} data={openNews.data} />;
 
     } else if (view === 'search') {
@@ -71,12 +68,6 @@ export function Feed() {
                </div>;
   }
 
-  function goBack(e) {
-    e.preventDefault();
-    dispatch(setView('subreddit'));
-    dispatch(setOpenNewsId(null));
-  }
-
   function reload(e) {
     e.preventDefault();
     dispatch(fetchFeed(subreddit));
@@ -85,19 +76,8 @@ export function Feed() {
   return(
     <div data-test="feed" aria-live="polite" className={style.feed}>
       <h2 data-test="feed-heading">{heading}</h2>
-      {view === 'search' && <a 
-                              data-test="go-back-link" 
-                              href="/" 
-                              onClick={goBack}>Go Back to {prepareSubredditHeading(subreddit)}
-                              </a>
-                            }
+      {view === 'search' && <GoBackLink />}
       <div data-test="content">{content}</div>
-      {view === 'singleNews' && <a 
-                              data-test="go-back-link" 
-                              href="/" 
-                              onClick={goBack}>Go Back to {prepareSubredditHeading(subreddit)}
-                              </a>
-                            }
     </div>
   );
 }

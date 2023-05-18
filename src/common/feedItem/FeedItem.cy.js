@@ -53,15 +53,21 @@ describe('Render FeedItem component (one news) with different content', () => {
     it('Renders correctly in the subreddit view (several news)', () => {
       cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').should('exist')
+      cy.getByData('go-back-link').should('not.exist')
+    })
+
+    it('Renders correctly in the search view (several news)', () => {
       store.dispatch(setView('search'))
+      cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').should('exist')
-      store.dispatch(setView('subreddit'))
+      cy.getByData('go-back-link').should('not.exist')
     })
 
     it('Renders correctly in the single news view', () => {
       store.dispatch(setView('singleNews'))
       cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').should('not.exist')
+      cy.getByData('go-back-link').should('exist')
     })
 
     it('"Open single news link" works correctly', () => {

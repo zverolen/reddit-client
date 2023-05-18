@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectView, setOpenNewsId, setView } from "../../features/feed/feedSlice";
+import { GoBackLink } from "../goBackLink/GoBackLink";
 
 export function FeedItem({ data }) {
   let content;
@@ -16,7 +17,6 @@ export function FeedItem({ data }) {
     dispatch(setView('singleNews'));
   }
 
-  // OPPORTUNITY: extract concrete content type rendering into a component and leave the common, like Go Back link, etc.
   // Rough checks while I'm figuring out how to distinguish between the possible content
     if (data.post_hint === 'hosted:video') {
     content = <div>
@@ -54,6 +54,7 @@ export function FeedItem({ data }) {
       <h3>{data.title}</h3>
       {content}
       {isSubredditView && <a data-test="open-single-news" href="/" onClick={handleOpenNews}>See full news</a>}
+      {view === 'singleNews' && <GoBackLink />}
       <hr/>
     </div>
   );
