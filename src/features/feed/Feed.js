@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { 
   selectSubreddit, 
   selectAllNews,
-  selectCurrentNews,
+  selectOpenNews,
   selectSearchedNews,
   fetchFeed,
-  selectFeedStatus,
-  selectFeedView,
+  selectStatus,
+  selectView,
   selectSearchTerm,
-  setCurrentView,
-  setCurrentNewsId
+  setView,
+  setOpenNewsId
 } from "./feedSlice";
 import { prepareSubredditHeading } from "../../util/util";
 import { FeedItem } from "../../common/feedItem/FeedItem";
@@ -21,11 +21,11 @@ import style from './Feed.module.css';
 export function Feed() {
 
   const dispatch = useDispatch();
-  const status = useSelector(selectFeedStatus);
-  const view = useSelector(selectFeedView);
-  const currentSubreddit = useSelector(selectSubreddit);
+  const status = useSelector(selectStatus);
+  const view = useSelector(selectView);
+  const subreddit = useSelector(selectSubreddit);
   const allNews = useSelector(selectAllNews);
-  const currentNews = useSelector(selectCurrentNews);
+  const openNews = useSelector(selectOpenNews);
   const searchedNews = useSelector(selectSearchedNews);
   const searchTerm = useSelector(selectSearchTerm);
 
@@ -42,15 +42,15 @@ export function Feed() {
     content = <p>loading</p>
 
   } else if (status === 'success') {
-    heading = prepareSubredditHeading(currentSubreddit);
+    heading = prepareSubredditHeading(subreddit);
 
     if (view === 'subreddit') {
-      // heading = prepareSubredditHeading(currentSubreddit);
+      // heading = prepareSubredditHeading(subreddit);
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
 
     } else if (view === 'singleNews') {
-      // heading = prepareSubredditHeading(currentSubreddit);
-      content = <FeedItem key={currentNews.data.id} data={currentNews.data} />;
+      // heading = prepareSubredditHeading(subreddit);
+      content = <FeedItem key={openNews.data.id} data={openNews.data} />;
 
     } else if (view === 'search') {
       if (searchedNews.length > 0) {
@@ -64,7 +64,7 @@ export function Feed() {
     }
 
   } else if (status === 'failed') {
-    heading = prepareSubredditHeading(currentSubreddit);
+    heading = prepareSubredditHeading(subreddit);
     content = <div data-test="error">
                 <p>Subreddit was not loaded due to a system error. Try <a data-test="reload-link" href="/" onClick={reload}>reloading</a> or <a data-test="support-link" href="mailto:??@??.??">contact the support</a>.
                </p>
@@ -73,13 +73,13 @@ export function Feed() {
 
   function goBack(e) {
     e.preventDefault();
-    dispatch(setCurrentView('subreddit'));
-    dispatch(setCurrentNewsId(null));
+    dispatch(setView('subreddit'));
+    dispatch(setOpenNewsId(null));
   }
 
   function reload(e) {
     e.preventDefault();
-    dispatch(fetchFeed(currentSubreddit));
+    dispatch(fetchFeed(subreddit));
   }
   
   return(
@@ -88,14 +88,14 @@ export function Feed() {
       {view === 'search' && <a 
                               data-test="go-back-link" 
                               href="/" 
-                              onClick={goBack}>Go Back to {prepareSubredditHeading(currentSubreddit)}
+                              onClick={goBack}>Go Back to {prepareSubredditHeading(subreddit)}
                               </a>
                             }
       <div data-test="content">{content}</div>
       {view === 'singleNews' && <a 
                               data-test="go-back-link" 
                               href="/" 
-                              onClick={goBack}>Go Back to {prepareSubredditHeading(currentSubreddit)}
+                              onClick={goBack}>Go Back to {prepareSubredditHeading(subreddit)}
                               </a>
                             }
     </div>

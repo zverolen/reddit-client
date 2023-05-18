@@ -6,24 +6,24 @@ const initialState = {
   status: 'idle',
   error: null,
   searchTerm: '',
-  currentNewsId: null,
-  currentView: 'subreddit'
+  openNewsId: null,
+  view: 'subreddit'
 };
 
 export const feedSlice = createSlice({
-  name: 'feedSubreddit',
+  name: 'feed',
   initialState,
   reducers: {
-    setCurrentNewsId: (state, action) => {
-      state.currentNewsId = action.payload;
+    setOpenNewsId: (state, action) => {
+      state.openNewsId = action.payload;
     },
-    setCurrentView: (state, action) => {
-      state.currentView = action.payload;
+    setView: (state, action) => {
+      state.view = action.payload;
     },
     search: (state, action) => {
       state.searchTerm = action.payload;
     },
-    setCurrentSubreddit: (state, action) => {
+    setSubreddit: (state, action) => {
       state.subreddit = action.payload;
     }
   },
@@ -58,14 +58,14 @@ export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) =>
     return response;
 });
 
-export const { setCurrentNewsId, setCurrentView, search, setCurrentSubreddit  } = feedSlice.actions;
+export const { setOpenNewsId, setView, search, setSubreddit  } = feedSlice.actions;
 
-export const selectSubreddit = (state) => state.feedSubreddit.subreddit;
-export const selectAllNews = (state) => state.feedSubreddit.news;
-export const selectCurrentNews = (state) => state.feedSubreddit.news.find(news => news.data.id === state.feedSubreddit.currentNewsId);
-export const selectSearchedNews = (state) => state.feedSubreddit.news.filter(news => news.data.title.includes(state.feedSubreddit.searchTerm));
-export const selectFeedStatus = (state) => state.feedSubreddit.status;
-export const selectFeedView = (state) => state.feedSubreddit.currentView;
-export const selectSearchTerm = (state) => state.feedSubreddit.searchTerm;
+export const selectSubreddit = (state) => state.feed.subreddit;
+export const selectAllNews = (state) => state.feed.news;
+export const selectOpenNews = (state) => state.feed.news.find(news => news.data.id === state.feed.openNewsId);
+export const selectSearchedNews = (state) => state.feed.news.filter(news => news.data.title.includes(state.feed.searchTerm));
+export const selectStatus = (state) => state.feed.status;
+export const selectView = (state) => state.feed.view;
+export const selectSearchTerm = (state) => state.feed.searchTerm;
 
 export default feedSlice.reducer;

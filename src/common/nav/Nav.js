@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { fetchFeed, setCurrentSubreddit, setCurrentView } from "../../features/feed/feedSlice";
+import { fetchFeed, setSubreddit, setView } from "../../features/feed/feedSlice";
 import { Collapsible } from "../collapsible/Collapsible";
 
 import styles from './Nav.module.css';
@@ -10,9 +10,9 @@ export function Nav({ size }) {
   
   function handleSubredditsNav(e) {
     e.preventDefault();
-    dispatch(setCurrentView('subreddit'));
+    dispatch(setView('subreddit'));
     dispatch(fetchFeed(e.target.dataset.endpoint));
-    dispatch(setCurrentSubreddit(e.target.dataset.endpoint));
+    dispatch(setSubreddit(e.target.dataset.endpoint));
   }
 
   const navLinks = <nav>

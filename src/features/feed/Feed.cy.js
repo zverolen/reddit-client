@@ -1,6 +1,6 @@
 import React from 'react'
 import { Feed } from './Feed'
-import { search, setCurrentView } from './feedSlice'
+import { search, setView } from './feedSlice'
 import { store } from '../../app/store'
 
 //!! Currently the third test runs with .only (no unmounting of the component or anything)
@@ -25,7 +25,7 @@ describe('<Feed />', () => {
       cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
     })
     store.dispatch(search('JUICE'));
-    store.dispatch(setCurrentView('search'));
+    store.dispatch(setView('search'));
     cy.mount(<Feed />)
     cy.getByData('feed-heading').contains('Search results for the term "JUICE":')
     cy.getByData('content').children().should('have.length', 2)
@@ -38,7 +38,7 @@ describe('<Feed />', () => {
       cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
     })
     store.dispatch(search('фваващдоыва'));
-    store.dispatch(setCurrentView('search'));
+    store.dispatch(setView('search'));
     cy.mount(<Feed term={'фваващдоыва'}/>)
     cy.getByData('feed-heading').contains('No results for your phrase "фваващдоыва".')
     cy.getByData('error').contains('Try another phrase or contact the support')

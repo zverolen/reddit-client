@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { search, setCurrentView } from "../../features/feed/feedSlice";
+import { search, setView } from "../../features/feed/feedSlice";
 
 import style from './Search.module.css';
 
@@ -18,7 +18,7 @@ export function Search() {
     e.preventDefault();
     if (searchTerm !== '') {
       dispatch(search(searchTerm));
-      dispatch(setCurrentView('search'));
+      dispatch(setView('search'));
       setSearchTerm('');
     }; 
   }

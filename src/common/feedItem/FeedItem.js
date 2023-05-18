@@ -2,18 +2,18 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectFeedView, setCurrentNewsId, setCurrentView } from "../../features/feed/feedSlice";
+import { selectView, setOpenNewsId, setView } from "../../features/feed/feedSlice";
 
 export function FeedItem({ data }) {
   let content;
   const dispatch = useDispatch();
-  const view = useSelector(selectFeedView);
+  const view = useSelector(selectView);
   const isSubredditView = view === 'subreddit' || view === 'search';
 
   function handleOpenNews(e) {
     e.preventDefault();
-    dispatch(setCurrentNewsId(data.id));
-    dispatch(setCurrentView('singleNews'));
+    dispatch(setOpenNewsId(data.id));
+    dispatch(setView('singleNews'));
   }
 
   // OPPORTUNITY: extract concrete content type rendering into a component and leave the common, like Go Back link, etc.

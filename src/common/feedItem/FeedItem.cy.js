@@ -1,7 +1,7 @@
 import React from 'react'
 import { FeedItem } from './FeedItem'
 import { data } from '../../data/testingDataSubreddit'
-import { setCurrentView } from '../../features/feed/feedSlice'
+import { setView } from '../../features/feed/feedSlice'
 import { store } from '../../app/store'
 
 // TODO: check that markdown is formatted correctly
@@ -53,19 +53,19 @@ describe('Render FeedItem component (one news) with different content', () => {
     it('Renders correctly in the subreddit view (several news)', () => {
       cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').should('exist')
-      store.dispatch(setCurrentView('search'))
+      store.dispatch(setView('search'))
       cy.getByData('open-single-news').should('exist')
-      store.dispatch(setCurrentView('subreddit'))
+      store.dispatch(setView('subreddit'))
     })
 
     it('Renders correctly in the single news view', () => {
-      store.dispatch(setCurrentView('singleNews'))
+      store.dispatch(setView('singleNews'))
       cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').should('not.exist')
     })
 
     it('"Open single news link" works correctly', () => {
-      store.dispatch(setCurrentView('subreddit'))
+      store.dispatch(setView('subreddit'))
       cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').click()
       cy.getByData('open-single-news').should('not.exist')
