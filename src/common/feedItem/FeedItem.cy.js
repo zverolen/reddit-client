@@ -4,7 +4,7 @@ import { data } from '../../data/testingDataSubreddit'
 import { setView } from '../../features/feed/feedSlice'
 import { store } from '../../app/store'
 
-// TODO: check that markdown is formatted correctly
+// TODO: check that markdown is formatted correctly 
 
 describe('Render FeedItem component (one news) with different content', () => {
 

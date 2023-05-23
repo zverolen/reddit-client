@@ -25,7 +25,7 @@ export function Nav({ size }) {
       <div data-test="nav" className={styles.container}>
         {size === 'small' 
           ? 
-          <Collapsible>{ navLinks }</Collapsible>
+          <Collapsible buttonName="Subreddits">{ navLinks }</Collapsible>
           : 
           <>{ navLinks }</>
         }

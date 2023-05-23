@@ -3,7 +3,7 @@ import { Feed } from './Feed'
 import { search, setView } from './feedSlice'
 import { store } from '../../app/store'
 
-//!! Currently the third test runs with .only (no unmounting of the component or anything)
+//!! Currently the third test runs with .only (no unmounting of the component or anything) 
 
 describe('<Feed />', () => {
   it('Renders correctly with data from file', () => {

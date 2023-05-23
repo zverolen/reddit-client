@@ -4,7 +4,6 @@ const initialState = {
   subreddit: 'science',
   news: [],
   status: 'idle',
-  error: null,
   searchTerm: '',
   openNewsId: null,
   view: 'subreddit'

@@ -11,9 +11,10 @@ import {
   selectView,
   selectSearchTerm
 } from "./feedSlice";
-import { prepareSubredditHeading } from "../../util/util";
 import { FeedItem } from "../../common/feedItem/FeedItem";
 import { GoBackLink } from "../../common/goBackLink/GoBackLink";
+import { prepareSubredditHeading } from "../../util/util";
+
 
 import style from './Feed.module.css';
 
@@ -42,8 +43,10 @@ export function Feed() {
 
   } else if (status === 'success') {
     heading = prepareSubredditHeading(subreddit);
-
+  
     if (view === 'subreddit') {
+      console.log('How many times you render?');
+      // console.log(allNews);
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
 
     } else if (view === 'singleNews') {
@@ -64,7 +67,7 @@ export function Feed() {
     heading = prepareSubredditHeading(subreddit);
     content = <div data-test="error">
                 <p>Subreddit was not loaded due to a system error. Try <a data-test="reload-link" href="/" onClick={reload}>reloading</a> or <a data-test="support-link" href="mailto:??@??.??">contact the support</a>.
-               </p>
+                </p>
                </div>;
   }
 
