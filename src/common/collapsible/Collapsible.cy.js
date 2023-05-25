@@ -9,7 +9,7 @@ const navLinks = <ul>
 
 describe('<Collapsible />', () => {
   it('Works properly with the subreddits navigation links', () => {
-    cy.mount(<Collapsible children={navLinks} />)
+    cy.mount(<Collapsible children={navLinks} buttonName="Subreddits"/>)
     cy.get('button').contains('Subreddits')
     cy.getByData('dropdown').should('be.empty')
     cy.get('button').click()

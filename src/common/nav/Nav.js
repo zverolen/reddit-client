@@ -25,6 +25,7 @@ export function Nav({ size }) {
       <div data-test="nav" className={styles.container}>
         {size === 'small' 
           ? 
+          //NOTE: Passing children as props so that Collapsible could wrap whatever content
           <Collapsible buttonName="Subreddits">{ navLinks }</Collapsible>
           : 
           <>{ navLinks }</>

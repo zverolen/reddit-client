@@ -2,11 +2,15 @@ import React, { useState } from "react";
 
 import styles from './Collapsible.module.css';
 
-export function Collapsible({ children }) {
+// NOTE: default values because not all props are used in different cases
+export function Collapsible({ children, buttonName, additionalAction = null, actionRequired = false }) {
   const [ isExpanded, setIsExpanded ] = useState(false);
 
-  function handleClick() {
+  function handleClick(e) {
     setIsExpanded(!isExpanded);
+    if (additionalAction && actionRequired) {
+      additionalAction(e);
+    }
   }
 
   const toggleButton = <button
@@ -15,7 +19,7 @@ export function Collapsible({ children }) {
                           aria-expanded={isExpanded}
                           onClick={handleClick}
                         >
-                          Subreddits
+                          {buttonName}
                         </button>;
 
   return (  

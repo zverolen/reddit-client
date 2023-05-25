@@ -1,6 +1,13 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
+// function formatDate(date) {
+//   return new Intl.DateTimeFormat(
+//     'en-US',
+//     { weekday: 'long' }
+//   ).format(date);
+// }
+
 export function CommentsItem({ data }) {
   // console.log(data);
   return(

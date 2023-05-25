@@ -30,7 +30,7 @@ export function Feed() {
   const searchTerm = useSelector(selectSearchTerm);
 
   let content;
-  let heading;
+  let heading = <p>loading</p>;
 
   useEffect(() => {
     if (status === 'idle') {
@@ -38,10 +38,11 @@ export function Feed() {
     }
   }, [status, dispatch])
 
-  if (status === 'loading') {
-    content = <p>loading</p>
+  // if (status === 'loading') {
+  //   content = <p>loading</p>
 
-  } else if (status === 'success') {
+  // } else if (status === 'success') {
+  if (status === 'success') {
     heading = prepareSubredditHeading(subreddit);
   
     if (view === 'subreddit') {
