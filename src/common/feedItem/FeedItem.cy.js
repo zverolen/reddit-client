@@ -21,7 +21,7 @@ describe('Render FeedItem component (one news) with different content', () => {
       cy.mount(<FeedItem data={data.data.children[1].data}/>)
       cy.get('p[data-test="author"]').contains('Wagamaga')
       cy.get('h3').contains('Wearing hearing aids could help cut the risk of dementia, according to a large decade-long study. The research accounted for other factors, including loneliness, social isolation and depression, but found that untreated hearing loss still had a strong association with dementia')
-      cy.get('div[data-subreddit="science"]').find('div').should('not.exist')
+      //TODO: When the structure changes add test to check there's no content
     })
   
     it('Renders a news with a video', () => {

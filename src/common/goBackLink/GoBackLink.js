@@ -7,7 +7,8 @@ export function GoBackLink() {
   const dispatch = useDispatch();
   const subreddit = useSelector(selectSubreddit);
   
-  function goBack(e) {
+  // MEMO: Event handler
+  function handleGoBack(e) {
     e.preventDefault();
     dispatch(setView('subreddit'));
     dispatch(setOpenNewsId(null));
@@ -17,7 +18,7 @@ export function GoBackLink() {
     <a 
       data-test="go-back-link" 
       href="/"
-      onClick={goBack}
+      onClick={handleGoBack}
       >
         Go back to {prepareSubredditHeading(subreddit)}
       </a>                     

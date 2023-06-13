@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { fetchFeed, setSubreddit, setView } from "../../features/feed/feedSlice";
+import { setSubreddit, setView } from "../../features/feed/feedSlice";
 import { Collapsible } from "../collapsible/Collapsible";
 
 import styles from './Nav.module.css';
@@ -8,10 +8,12 @@ import styles from './Nav.module.css';
 export function Nav({ size }) {
   const dispatch = useDispatch();
   
+  // MEMO: Event handler 
   function handleSubredditsNav(e) {
     e.preventDefault();
     dispatch(setView('subreddit'));
-    dispatch(fetchFeed(e.target.dataset.endpoint));
+    // LEGACY: was used for making requests to the Reddit json api.
+    // dispatch(fetchFeed(e.target.dataset.endpoint));
     dispatch(setSubreddit(e.target.dataset.endpoint));
   }
 
@@ -25,8 +27,8 @@ export function Nav({ size }) {
       <div data-test="nav" className={styles.container}>
         {size === 'small' 
           ? 
-          //NOTE: Passing children as props so that Collapsible could wrap whatever content
-          <Collapsible buttonName="Subreddits">{ navLinks }</Collapsible>
+          //MEMO: Passing children as props so that Collapsible could wrap whatever content
+          <Collapsible additionalActionRequired={false} buttonName="Subreddits">{ navLinks }</Collapsible>
           : 
           <>{ navLinks }</>
         }

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   subreddit: 'science',
@@ -12,6 +12,7 @@ const initialState = {
 export const feedSlice = createSlice({
   name: 'feed',
   initialState,
+  //MEMO: "Event handlers" based on the event type, return new state
   reducers: {
     setOpenNewsId: (state, action) => {
       state.openNewsId = action.payload;
@@ -24,40 +25,48 @@ export const feedSlice = createSlice({
     },
     setSubreddit: (state, action) => {
       state.subreddit = action.payload;
+    },
+    fakeLoadNews: (state, action) => {
+      state.news = action.payload.data.children;
+    },
+    fakeSetStatus: (state, action) => {
+      state.status = action.payload;
     }
   },
-  extraReducers(builder) {
-    builder
-      .addCase(fetchFeed.pending, (state, action) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchFeed.fulfilled, (state, action) => {
-        state.status = 'success';
-        state.news = action.payload.data.children;
-      })
-      .addCase(fetchFeed.rejected, (state, action) => {
-        state.status = 'failed';
-        console.log(action.error.message);
-      })
-  }
+  // LEGACY: was used for making requests to the Reddit json api.
+  // extraReducers(builder) {
+  //   builder
+  //     .addCase(fetchFeed.pending, (state, action) => {
+  //       state.status = 'loading';
+  //     })
+  //     .addCase(fetchFeed.fulfilled, (state, action) => {
+  //       state.status = 'success';
+  //       state.news = action.payload.data.children;
+  //     })
+  //     .addCase(fetchFeed.rejected, (state, action) => {
+  //       state.status = 'failed';
+  //       console.log(action.error.message);
+  //     })
+  // }
 });
 
-export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) => {  
-  const url = `https://www.reddit.com/r/${subreddit}.json`;
-  const response = fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-      return response.json()
-    })
-    .then((json) => {
-      return json;
-    });
-    return response;
-});
+// LEGACY: was used for making requests to the Reddit json api.
+// export const fetchFeed = createAsyncThunk('feed/fetchFeed', async (subreddit) => {  
+//   const url = `https://www.reddit.com/r/${subreddit}.json`;
+//   const response = fetch(url)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error(`HTTP error: ${response.status}`);
+//       }
+//       return response.json()
+//     })
+//     .then((json) => {
+//       return json;
+//     });
+//     return response;
+// });
 
-export const { setOpenNewsId, setView, search, setSubreddit  } = feedSlice.actions;
+export const { setOpenNewsId, setView, search, setSubreddit, fakeLoadNews, fakeSetStatus  } = feedSlice.actions;
 
 export const selectSubreddit = (state) => state.feed.subreddit;
 export const selectAllNews = (state) => state.feed.news;

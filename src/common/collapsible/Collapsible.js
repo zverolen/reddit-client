@@ -2,14 +2,16 @@ import React, { useState } from "react";
 
 import styles from './Collapsible.module.css';
 
-// NOTE: default values because not all props are used in different cases
-export function Collapsible({ children, buttonName, additionalAction = null, actionRequired = false }) {
+// MEMO: default values because not all props are used in different cases
+export function Collapsible({ children, buttonName, onAdditionalAction = null, additionalActionRequired = false }) {
   const [ isExpanded, setIsExpanded ] = useState(false);
 
+  // MEMO: Event handler
+  // MEMO: Triggers rerender
   function handleClick(e) {
     setIsExpanded(!isExpanded);
-    if (additionalAction && actionRequired) {
-      additionalAction(e);
+    if (additionalActionRequired) {
+      onAdditionalAction(e);
     }
   }
 

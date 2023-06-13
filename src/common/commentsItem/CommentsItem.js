@@ -1,6 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
+// move to util.js
 // function formatDate(date) {
 //   return new Intl.DateTimeFormat(
 //     'en-US',
@@ -9,7 +10,6 @@ import ReactMarkdown from "react-markdown";
 // }
 
 export function CommentsItem({ data }) {
-  // console.log(data);
   return(
   <div data-test="comments-item" key={data.id}>
     <p data-test="comments-author">{data.author}</p>

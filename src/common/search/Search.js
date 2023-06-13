@@ -10,10 +10,14 @@ export function Search() {
   const dispatch = useDispatch();
   const isDisabled = searchTerm === '';
 
+  // MEMO: Event handler
+  // MEMO: Triggers rerender (input with characters)
   function handleSearchInput(e) {
     setSearchTerm(e.target.value);
   }
 
+  // MEMO: Event handler
+  // MEMO: Triggers rerender (clears the input)
   function handleSearch(e) {
     e.preventDefault();
     if (searchTerm !== '') {

@@ -1,4 +1,4 @@
-export const comments = [
+export const data = [
   {
       "kind": "t1",
       "data": {

@@ -7,6 +7,7 @@ import style from './Content.module.css';
 export function Content() {
   const [ windowSize, setWindowSize ] = useState(null);
 
+  // MEMO:
   useLayoutEffect(() => {
     findWindowWidth();
 
@@ -16,6 +17,7 @@ export function Content() {
       findWindowWidth();
     } 
 
+    // MEMO: triggers rerender
     function findWindowWidth() {
       if (window.innerWidth <= 500 ) {
         setWindowSize('small');

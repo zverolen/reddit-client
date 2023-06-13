@@ -6,14 +6,17 @@ import {
   selectAllNews,
   selectOpenNews,
   selectSearchedNews,
-  fetchFeed,
   selectStatus,
   selectView,
-  selectSearchTerm
+  selectSearchTerm,
+  fakeLoadNews,
+  fakeSetStatus
 } from "./feedSlice";
 import { FeedItem } from "../../common/feedItem/FeedItem";
 import { GoBackLink } from "../../common/goBackLink/GoBackLink";
 import { prepareSubredditHeading } from "../../util/util";
+
+import { data } from "../../data/testingDataSubreddit";
 
 
 import style from './Feed.module.css';
@@ -34,20 +37,18 @@ export function Feed() {
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchFeed('science'));
+      // LEGACY: was used for making requests to the Reddit json api.
+      // dispatch(fetchFeed('science'));
+      dispatch(fakeLoadNews(data));
+      dispatch(fakeSetStatus('success'));
     }
   }, [status, dispatch])
 
-  // if (status === 'loading') {
-  //   content = <p>loading</p>
-
-  // } else if (status === 'success') {
   if (status === 'success') {
     heading = prepareSubredditHeading(subreddit);
   
     if (view === 'subreddit') {
-      console.log('How many times you render?');
-      // console.log(allNews);
+      // console.log(allNews);    
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
 
     } else if (view === 'singleNews') {
@@ -72,9 +73,13 @@ export function Feed() {
                </div>;
   }
 
+  // MEMO: Event handler
   function reload(e) {
     e.preventDefault();
-    dispatch(fetchFeed(subreddit));
+    // LEGACY: was used for making requests to the Reddit json api.
+    // dispatch(fetchFeed('science'));
+    dispatch(fakeLoadNews(data));
+    dispatch(fakeSetStatus('success'));
   }
   
   return(

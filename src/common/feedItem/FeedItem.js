@@ -12,6 +12,7 @@ export function FeedItem({ data }) {
   const view = useSelector(selectView);
   const isSubredditView = view === 'subreddit' || view === 'search';
 
+  // MEMO: Event handler
   function handleOpenNews(e) {
     e.preventDefault();
     dispatch(setOpenNewsId(data.id));
