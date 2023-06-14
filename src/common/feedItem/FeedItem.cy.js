@@ -78,4 +78,16 @@ describe('Render FeedItem component (one news) with different content', () => {
     })
 
   })
+
+  context('Renders correctly with comments and without', () => {
+    it('Renders with comments', () => {
+      cy.mount(<FeedItem data={data.data.children[1].data}/>)
+      cy.getByData('toggle-feedsNav-heading').should('exist')
+    })
+
+    it('Renders without comments', () => {
+      cy.mount(<FeedItem data={data.data.children[2].data}/>)
+      cy.getByData('toggle-feedsNav-heading').should('not.exist')
+    })
+  })
 })

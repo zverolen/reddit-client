@@ -25,6 +25,8 @@ export function Content() {
         setWindowSize('big');
       }
     }
+
+    //TODO: Add and test clean up
   });
   
   return ( 

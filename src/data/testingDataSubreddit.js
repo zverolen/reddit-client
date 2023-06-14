@@ -430,7 +430,7 @@ export const data = {
             "mod_reports": [],
             "author_patreon_flair": false,
             "author_flair_text_color": null,
-            "permalink": "/r/space/comments/12lvjhb/juice_launch/",
+            "permalink": "",
             "parent_whitelist_status": "all_ads",
             "stickied": false,
             "url": "https://v.redd.it/mwxutbxafuta1",

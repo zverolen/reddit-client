@@ -56,7 +56,7 @@ export function FeedItem({ data }) {
       <h3>{data.title}</h3>
       {content}
       {isSubredditView && <a data-test="open-single-news" href="/" onClick={handleOpenNews}>See full news</a>}
-      <Comments feedItemData={data} />
+      {data.permalink ? <Comments /> : <p>No comments yet</p>}
       {view === 'singleNews' && <GoBackLink />}
       <hr/>
     </div>
