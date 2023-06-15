@@ -83,10 +83,10 @@ export function Feed() {
   }
   
   return(
-    <div data-test="feed" aria-live="polite" className={style.feed}>
+    <main data-test="feed" aria-live="polite" className={style.feed}>
       <h2 data-test="feed-heading">{heading}</h2>
       {view === 'search' && <GoBackLink />}
       <div data-test="content">{content}</div>
-    </div>
+    </main>
   );
 }

@@ -24,7 +24,7 @@ export function Nav({ size }) {
                   </nav>;
 
   return (
-      <div data-test="nav" className={styles.container}>
+      <aside data-test="nav" className={styles.container}>
         {size === 'small' 
           ? 
           //MEMO: Passing children as props so that Collapsible could wrap whatever content
@@ -32,6 +32,6 @@ export function Nav({ size }) {
           : 
           <>{ navLinks }</>
         }
-      </div>
+      </aside>
   );
 }

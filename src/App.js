@@ -3,16 +3,14 @@ import { Content } from './common/content/Content';
 import { Search } from './common/search/Search';
 import './App.css';
 
-function App() {
+function App() { 
   return (
     <div className='App'>
       <header className="header">
-      <Search />
-      </header>
-      <main>
         <h1>Your Reddit Client App</h1>
-         <Content />
-      </main>    
+        <Search />
+      </header>
+      <Content />
     </div>
   );
 }
