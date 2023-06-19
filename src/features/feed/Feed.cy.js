@@ -1,6 +1,6 @@
 import React from 'react'
 import { Feed } from './Feed'
-import { search, setView } from './feedSlice'
+import { search, setView, fakeSetStatus } from './feedSlice'
 import { store } from '../../app/store'
 
 //!! Currently the third test runs with .only (no unmounting of the component or anything) 
@@ -22,9 +22,10 @@ describe('<Feed />', () => {
   })
 
   it('Renders correctly with the search term "JUICE"', () => {
-    cy.fixture('subreddit').then((json) => {
-      cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
-    })
+    // LEGACY: was used for making requests to the Reddit json api.
+    // cy.fixture('subreddit').then((json) => {
+    //   cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
+    // })
     store.dispatch(search('JUICE'));
     store.dispatch(setView('search'));
     cy.mount(<Feed />)
@@ -35,9 +36,10 @@ describe('<Feed />', () => {
   })
 
   it('Renders correct error message if the search phrase is not found', () => {
-    cy.fixture('subreddit').then((json) => {
-      cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
-    })
+    // LEGACY: was used for making requests to the Reddit json api.
+    // cy.fixture('subreddit').then((json) => {
+    //   cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
+    // })
     store.dispatch(search('фваващдоыва'));
     store.dispatch(setView('search'));
     cy.mount(<Feed term={'фваващдоыва'}/>)
@@ -46,16 +48,17 @@ describe('<Feed />', () => {
     cy.getByData('support-link').should('have.attr', 'href').and('match', /mailto:/)
   })
 
-
-  // it('Renders the error message correctly', () => {
-  //   // LEGACY: was used for making requests to the Reddit json api.
-  //   // cy.fixture('subreddit').then((json) => {
-  //   //   cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json, statusCode: 404}).as('getError')
-  //   // })
-  //   cy.mount(<Feed />)
-  //   cy.getByData('error').contains('Subreddit was not loaded due to a system error. Try reloading or contact the support.')
-  //   cy.getByData('reload-link').contains('reload')
-  //   cy.getByData('support-link').should('have.attr', 'href').and('match', /mailto:/)
-  //   cy.getByData('reload-link').click()
-  // })
+  it('Renders the error message correctly', () => {
+    // LEGACY: was used for making requests to the Reddit json api.
+    // cy.fixture('subreddit').then((json) => {
+    //   cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json, statusCode: 404}).as('getError')
+    // })
+    store.dispatch(setView('subreddit'))
+    store.dispatch(fakeSetStatus('failed'))
+    cy.mount(<Feed />)
+    cy.getByData('error').contains('Subreddit was not loaded due to a system error. Try reloading or contact the support.')
+    cy.getByData('reload-link').contains('reload')
+    cy.getByData('support-link').should('have.attr', 'href').and('match', /mailto:/)
+    cy.getByData('reload-link').click()
+  })
 })

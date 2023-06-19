@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setSubreddit, setView } from "../../features/feed/feedSlice";
+import { setSubreddit, setView, fakeSetStatus } from "../../features/feed/feedSlice";
 import { Collapsible } from "../collapsible/Collapsible";
 
 import styles from './Nav.module.css';
@@ -15,6 +15,11 @@ export function Nav({ size }) {
     // LEGACY: was used for making requests to the Reddit json api.
     // dispatch(fetchFeed(e.target.dataset.endpoint));
     dispatch(setSubreddit(e.target.dataset.endpoint));
+    if (e.target.dataset.endpoint === 'scifi') {
+      dispatch(fakeSetStatus('failed'));
+    } else {
+      dispatch(fakeSetStatus('success'));
+    }
   }
 
   const navLinks = <nav>

@@ -48,7 +48,6 @@ export function Feed() {
     heading = prepareSubredditHeading(subreddit);
   
     if (view === 'subreddit') {
-      // console.log(allNews);    
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
 
     } else if (view === 'singleNews') {
@@ -70,7 +69,7 @@ export function Feed() {
     content = <div data-test="error">
                 <p>Subreddit was not loaded due to a system error. Try <a data-test="reload-link" href="/" onClick={reload}>reloading</a> or <a data-test="support-link" href="mailto:??@??.??">contact the support</a>.
                 </p>
-               </div>;
+              </div>;
   }
 
   // MEMO: Event handler
