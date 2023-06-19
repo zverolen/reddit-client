@@ -45,7 +45,12 @@ export function Comments({ feedItemData }) {
 
   return(
           //MEMO: Passing children as props so that Collapsible could wrap whatever content
-          <Collapsible buttonName="Comments" onAdditionalAction={handleFetchComments} additionalActionRequired={true}>
+          <Collapsible 
+            openActionName="Show Comments"
+            closeActionName="Hide Comments"
+            onAdditionalAction={handleFetchComments} 
+            additionalActionRequired={true}
+          >
               <div>
               <h3>Comments</h3>
               <div data-test="comments-content">

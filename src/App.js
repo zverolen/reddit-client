@@ -1,6 +1,7 @@
 import React from 'react';
 import { Content } from './common/content/Content';
 import { Search } from './common/search/Search';
+import { Footer } from './common/footer/Footer';
 import './App.css';
 
 function App() { 
@@ -11,6 +12,7 @@ function App() {
         <Search />
       </header>
       <Content />
+      <Footer />
     </div>
   );
 }

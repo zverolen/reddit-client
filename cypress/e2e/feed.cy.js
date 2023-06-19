@@ -34,12 +34,22 @@ describe('User Flow Desktop', () => {
       //                 expect($el).to.have.attr('data-subreddit', 'science')
       //               })
 
+      // Sees the footer if scrolls down
+      cy.get('footer').should('exist')
+      cy.get('footer').find('p:first-child').should('have.text', 'This is a learning project. Check out the repo.')
+      cy.get('footer').find('p:last-child').should('have.text', 'Find me on Github, LinkedIn, Instagram or Facebook. Or, email me!')
+
       //Opens a single news
       cy.getByData('content').find(' > div:first-child [data-test="open-single-news"]').click()
 
       //Sees one news
       cy.getByData('content').children()
                     .should('have.length',  1)
+      
+       // Sees the footer if scrolls down
+       cy.get('footer').should('exist')
+       cy.get('footer').find('p:first-child').should('have.text', 'This is a learning project. Check out the repo.')
+       cy.get('footer').find('p:last-child').should('have.text', 'Find me on Github, LinkedIn, Instagram or Facebook. Or, email me!')
                     
       //Goes back from Single News view to Subreddit view
       cy.getByData('go-back-link').click()
@@ -252,12 +262,22 @@ describe('User Flow Mobile', () => {
       //                 expect($el).to.have.attr('data-subreddit', 'science')
       //               })
 
+       // Sees the footer if scrolls down
+       cy.get('footer').should('exist')
+       cy.get('footer').find('p:first-child').should('have.text', 'This is a learning project. Check out the repo.')
+       cy.get('footer').find('p:last-child').should('have.text', 'Find me on Github, LinkedIn, Instagram or Facebook. Or, email me!')
+
       //Opens a single news
       cy.getByData('content').find(' > div:first-child [data-test="open-single-news"]').click()
 
       //Sees one news
       cy.getByData('content').children()
                     .should('have.length',  1)
+
+       // Sees the footer if scrolls down
+       cy.get('footer').should('exist')
+       cy.get('footer').find('p:first-child').should('have.text', 'This is a learning project. Check out the repo.')
+       cy.get('footer').find('p:last-child').should('have.text', 'Find me on Github, LinkedIn, Instagram or Facebook. Or, email me!')
                     
       //Goes back from Single News view to Subreddit view
       cy.getByData('go-back-link').click()

@@ -27,10 +27,20 @@ export function Nav({ size }) {
       <aside data-test="nav" className={styles.container}>
         {size === 'small' 
           ? 
-          //MEMO: Passing children as props so that Collapsible could wrap whatever content
-          <Collapsible additionalActionRequired={false} buttonName="Subreddits">{ navLinks }</Collapsible>
+          //MEMO: Passing children as props so that Collapsible could wrap whatever content  
+            <Collapsible 
+              openActionName="Show subreddits" 
+              closeActionName="Hide subreddits"
+              additionalActionRequired={false}
+            >
+              <h2>Subreddits</h2>
+              { navLinks }
+            </Collapsible>
           : 
-          <>{ navLinks }</>
+          <>
+            <h2>Subreddits</h2>
+            { navLinks }
+          </>
         }
       </aside>
   );
