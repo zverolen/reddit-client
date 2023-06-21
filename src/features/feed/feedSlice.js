@@ -71,7 +71,9 @@ export const { setOpenNewsId, setView, search, setSubreddit, fakeLoadNews, fakeS
 export const selectSubreddit = (state) => state.feed.subreddit;
 export const selectAllNews = (state) => state.feed.news;
 export const selectOpenNews = (state) => state.feed.news.find(news => news.data.id === state.feed.openNewsId);
-export const selectSearchedNews = (state) => state.feed.news.filter(news => news.data.title.includes(state.feed.searchTerm));
+export const selectSearchedNews = (state) => {
+  return state.feed.news.filter(news => news.data.title.toLowerCase().includes(state.feed.searchTerm.toLowerCase()));
+};
 export const selectStatus = (state) => state.feed.status;
 export const selectView = (state) => state.feed.view;
 export const selectSearchTerm = (state) => state.feed.searchTerm;

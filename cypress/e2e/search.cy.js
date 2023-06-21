@@ -177,4 +177,16 @@ describe('Perform Search', () => {
     cy.getByData('content').find('> div:nth-child(2) h3').contains('ESA is launching JUICE very soon! We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim so players can get hands on with this amazing spacecraft and learn more about the mission.')
   })
 
+  it('Performs case-insensitive search correctly', () => {
+    cy.visit("http://localhost:3000")
+  
+    cy.get('input').type('juice')
+    cy.getByData('search-button').click()
+
+    cy.getByData('feed-heading').contains('Search results for the term "juice":')
+    cy.getByData('content').children().should('have.length', 2)
+    cy.getByData('content').find('> div:first-child h3').contains('JUICE Launch')
+    cy.getByData('content').find('> div:nth-child(2) h3').contains('ESA is launching JUICE very soon! We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim so players can get hands on with this amazing spacecraft and learn more about the mission.')
+  })
+
 })
