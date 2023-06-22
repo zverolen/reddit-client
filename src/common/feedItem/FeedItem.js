@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectView, setOpenNewsId, setView } from "../../features/feed/feedSlice";
 import { GoBackLink } from "../goBackLink/GoBackLink";
 import { Comments } from "../../features/comments/Comments";
+import { formatDate } from "../../util/util";
 
 export function FeedItem({ data }) {
   let content;
@@ -54,6 +55,7 @@ export function FeedItem({ data }) {
     <div key={data.id} data-subreddit={data.subreddit}>
       <p data-test="author">{data.author}</p>
       <h3>{data.title}</h3>
+      <p>{formatDate(data.created)}</p>
       {content}
       {isSubredditView && <a data-test="open-single-news" href="/" onClick={handleOpenNews}>See full news</a>}
       {data.permalink ? <Comments /> : <p>No comments yet</p>}
