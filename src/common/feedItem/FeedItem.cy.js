@@ -4,7 +4,14 @@ import { data } from '../../data/testingDataSubreddit'
 import { setView } from '../../features/feed/feedSlice'
 import { store } from '../../app/store'
 
-// TODO: check that markdown is formatted correctly 
+// TODO: check that markdown is formatted correctly
+
+describe('Render base FeedItem content', () => {
+  it('Renders the date correctly', () => {
+    cy.mount(<FeedItem data={data.data.children[0].data}/>)
+    cy.getByData('date').should('have.text', 'Jan, 20 1970')
+  })
+})
 
 describe('Render FeedItem component (one news) with different content', () => {
 
@@ -70,7 +77,7 @@ describe('Render FeedItem component (one news) with different content', () => {
       cy.getByData('go-back-link').should('exist')
     })
 
-    it('"Open single news link" works correctly', () => {
+    it('Open single news link" works correctly', () => {
       store.dispatch(setView('subreddit'))
       cy.mount(<FeedItem data={data.data.children[0].data}/>)
       cy.getByData('open-single-news').click()

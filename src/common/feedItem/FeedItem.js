@@ -55,7 +55,7 @@ export function FeedItem({ data }) {
     <div key={data.id} data-subreddit={data.subreddit}>
       <p data-test="author">{data.author}</p>
       <h3>{data.title}</h3>
-      <p>{formatDate(data.created)}</p>
+      <p data-test="date">{formatDate(data.created)}</p>
       {content}
       {isSubredditView && <a data-test="open-single-news" href="/" onClick={handleOpenNews}>See full news</a>}
       {data.permalink ? <Comments /> : <p>No comments yet</p>}
