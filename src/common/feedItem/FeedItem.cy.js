@@ -39,7 +39,7 @@ describe('Render FeedItem component (one news) with different content', () => {
       cy.get('video').should('have.attr', 'src', 'https://v.redd.it/mwxutbxafuta1/DASH_720.mp4?source=fallback')
     })
   
-    it('Renders a news with a link', () => {
+    it('Renders a news with a rich video', () => {
       cy.mount(<FeedItem data={data.data.children[3].data}/>)
       cy.get('p[data-test="author"]').contains('andrewgarrison')
       cy.get('h3').contains('ESA is launching JUICE very soon! We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim so players can get hands on with this amazing spacecraft and learn more about the mission.')
@@ -52,6 +52,13 @@ describe('Render FeedItem component (one news) with different content', () => {
       cy.get('h3').contains('Found this gem. Anyone read this? Is it good?')
       cy.get('img').should('have.attr', 'alt')
       cy.get('img').should('have.attr', 'src', 'https://i.redd.it/pz0j5j7u3qta1.jpg')
+    })
+
+    it('Renders a news with a link', () => {
+      cy.mount(<FeedItem data={data.data.children[5].data}/>)
+      cy.get('p[data-test="author"]').contains('andrewgarrison')
+      cy.get('h3').contains('We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim.')
+      cy.get('a').contains('https://www.youtube.com/watch?v=TP42UZ8uRss')
     })
   })
 

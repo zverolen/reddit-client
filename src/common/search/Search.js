@@ -30,7 +30,7 @@ export function Search() {
   return (
     <form onSubmit={handleSearch} className={style.search} role="search">
       <div>
-        <label htmlFor="search-input">Search headlines (case-sensitive):</label>
+        <label htmlFor="search-input">Search headlines:</label>
         <input 
           value={searchTerm} 
           id="search-input"

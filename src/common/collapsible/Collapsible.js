@@ -11,12 +11,11 @@ export function Collapsible({
   additionalActionRequired = false
 }) {
   const [ isExpanded, setIsExpanded ] = useState(false);
-  const [ isCollapsed, setIsCollapsed ] = useState(true);
 
   // MEMO: Event handler
   // MEMO: Triggers rerender
   function handleClick(e) {
-    setIsCollapsed(!isCollapsed);
+    setIsExpanded(!isExpanded);
     if (additionalActionRequired) {
       onAdditionalAction(e);
     }
@@ -28,7 +27,7 @@ export function Collapsible({
                           aria-expanded={isExpanded}
                           onClick={handleClick}
                         >
-                          {isCollapsed ? openActionName : closeActionName}
+                          {isExpanded ? closeActionName : openActionName}
                         </button>;
 
   return (  
@@ -37,7 +36,7 @@ export function Collapsible({
       { toggleButton }  
     </div>
     <div data-test="dropdown" aria-live="polite">
-      { !isCollapsed && children }
+      { isExpanded && children }
     </div>
    </>
   );

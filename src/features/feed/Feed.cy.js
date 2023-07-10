@@ -12,7 +12,7 @@ describe('<Feed />', () => {
     //   cy.intercept('GET', 'https://www.reddit.com/r/science.json', {body: json}).as('getSubreddit')
     // })
     cy.mount(<Feed />)
-    cy.getByData('content').children().should('have.length', 5)
+    cy.getByData('content').children().should('have.length', 6)
 
     // All types of news
     cy.getByData('content').children().each(($el) => {
@@ -30,9 +30,10 @@ describe('<Feed />', () => {
     store.dispatch(setView('search'));
     cy.mount(<Feed />)
     cy.getByData('feed-heading').contains('Search results for the term "JUICE":')
-    cy.getByData('content').children().should('have.length', 2)
+    cy.getByData('content').children().should('have.length', 3)
     cy.getByData('content').find('> div:first-child h3').contains('JUICE Launch')
     cy.getByData('content').find('> div:nth-child(2) h3').contains('ESA is launching JUICE very soon! We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim so players can get hands on with this amazing spacecraft and learn more about the mission.')
+    cy.getByData('content').find('> div:nth-child(3) h3').contains('We had the great honor to team up with ESA to add the JUICE spacecraft to our space sim.')
   })
 
   it('Renders correct error message if the search phrase is not found', () => {

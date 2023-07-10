@@ -5,9 +5,9 @@ describe('<Search />', () => {
   it('Renders correctly', () => {
     cy.mount(<Search />)
     cy.get('form').should('have.attr', 'role', 'search')
-    cy.get('label').contains('Search headlines (case-sensitive):').and('have.attr', 'for', 'search-input')
+    cy.get('label').should('have.text', 'Search headlines:').and('have.attr', 'for', 'search-input')
     cy.get('input').should('have.attr', 'type', 'search').and('have.attr', 'id', 'search-input')
-    cy.getByData('search-button').contains('Search')
+    cy.getByData('search-button').should('have.text', 'Search')
   })
 
   it('Has all states (e.g. disabled, focused)', () => {

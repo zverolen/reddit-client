@@ -49,7 +49,7 @@ export function Feed() {
   
     if (view === 'subreddit') {
       content = allNews.map(news => <FeedItem key={news.data.id} data={news.data} />);
-
+      
     } else if (view === 'singleNews') {
       content = <FeedItem key={openNews.data.id} data={openNews.data} />;
 
