@@ -52,7 +52,7 @@ export function Comments({ feedItemData }) {
             additionalActionRequired={true}
           >
               <div>
-              <h3>Comments</h3>
+              <h4>Comments</h4>
               <div data-test="comments-content">
                 {content}
               </div>

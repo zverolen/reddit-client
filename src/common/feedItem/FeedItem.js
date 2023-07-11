@@ -31,7 +31,7 @@ export function FeedItem({ data }) {
               </div>;
 
   } else if (data.post_hint === 'rich:video') {
-    content = <div><a href={data.url}>Rich Video {data.url}</a></div>;
+    content = <div><a href={data.url}>Link to the external video</a></div>;
 
   } else if (data.post_hint === 'image') {
     // It's not clear what alt attribute should be used
@@ -44,7 +44,7 @@ export function FeedItem({ data }) {
               </div>;
 
   } else if (data.post_hint === 'link') {
-    content = <div><a href={data.url}>{data.url}</a></div>;
+    content = <div><a href={data.url}>Link to the external resource</a></div>;
 
   } else if (data.selftext) {
     content = <div><ReactMarkdown>{data.selftext}</ReactMarkdown></div>
